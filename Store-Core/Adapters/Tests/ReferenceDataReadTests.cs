@@ -31,14 +31,25 @@ using System.Threading.Tasks;
 			</entry>
 </feed>
  */
+using Grean.AtomEventStore;
 using Machine.Specifications;
+using Store_Core.Adapters.Atom;
 
 namespace Store_Core.Adapters.Tests
 {
     public class When_reading_an_atom_feed
     {
-        private const string atomFeed = " <feed xmlns=\"http://www.w3.org/2005/Atom\">\r\n\t<id>urn:uuid:95639379-e427-4023-8f03-a183fbd61381</id>\r\n\t<title type=\"text\">Index of event stream 95639379-e427-4023-8f03-a183fbd61381</title>\r\n\t<updated>2015-06-29T19:04:22.3443078+01:00</updated>\r\n\t<author>\r\n\t\t<name>Grean</name>\r\n\t</author>\r\n\t<link href=\"028872fe-cad5-492a-822a-1af00ad80708/95639379-e427-4023-8f03-a183fbd61381\" rel=\"self\" />\r\n\t<entry>\r\n\t\t<id>urn:uuid:505ebbe0-e2a0-4d7f-aab9-fd49b34889b3</id>\r\n\t\t<title type=\"text\">Changeset 505ebbe0-e2a0-4d7f-aab9-fd49b34889b3</title>\r\n\t\t<published>2015-06-29T19:04:22.3443078+01:00</published>\r\n\t\t<updated>2015-06-29T19:04:22.3443078+01:00</updated>\r\n\t\t<author>\r\n\t\t\t<name>Grean</name>\r\n\t\t</author>\r\n\t\t<content type=\"application/xml\">\r\n\t\t<product-entry xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"urn:paramore:samples:cakeshop\">\r\n\t\t\t<description>Sweet, sweet, almond Cake</description>\r\n\t\t\t<id>2</id>\r\n\t\t\t<name>Almond Cake</name>\r\n\t\t\t<type>Created</type>\r\n\t\t\t</product-entry>\r\n\t\t\t</content>\r\n\t\t\t</entry>\r\n</feed>";
+        private static ReferenceDataFeedReader<ProductEntry> s_feedReader;
+        private const string s_atomFeed = " <feed xmlns=\"http://www.w3.org/2005/Atom\">\r\n\t<id>urn:uuid:95639379-e427-4023-8f03-a183fbd61381</id>\r\n\t<title type=\"text\">Index of event stream 95639379-e427-4023-8f03-a183fbd61381</title>\r\n\t<updated>2015-06-29T19:04:22.3443078+01:00</updated>\r\n\t<author>\r\n\t\t<name>Grean</name>\r\n\t</author>\r\n\t<link href=\"028872fe-cad5-492a-822a-1af00ad80708/95639379-e427-4023-8f03-a183fbd61381\" rel=\"self\" />\r\n\t<entry>\r\n\t\t<id>urn:uuid:505ebbe0-e2a0-4d7f-aab9-fd49b34889b3</id>\r\n\t\t<title type=\"text\">Changeset 505ebbe0-e2a0-4d7f-aab9-fd49b34889b3</title>\r\n\t\t<published>2015-06-29T19:04:22.3443078+01:00</published>\r\n\t\t<updated>2015-06-29T19:04:22.3443078+01:00</updated>\r\n\t\t<author>\r\n\t\t\t<name>Grean</name>\r\n\t\t</author>\r\n\t\t<content type=\"application/xml\">\r\n\t\t<product-entry xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"urn:paramore:samples:cakeshop\">\r\n\t\t\t<description>Sweet, sweet, almond Cake</description>\r\n\t\t\t<id>2</id>\r\n\t\t\t<name>Almond Cake</name>\r\n\t\t\t<type>Created</type>\r\n\t\t\t</product-entry>\r\n\t\t\t</content>\r\n\t\t\t</entry>\r\n</feed>";
+        private static ProductEntry s_entry;
 
-        //private Because of = () => feedReader.ReadNextItem(atomFeed);
+        private Establish context = () =>
+        {
+            s_feedReader = new ReferenceDataFeedReader<ProductEntry>(s_atomFeed);
+        };
+
+        private Because of = () => s_entry = s_feedReader.FirstOrDefault();
+        
+        private It _should_have_an_item = () => s_entry.ShouldNotBeNull();
     }
 }
