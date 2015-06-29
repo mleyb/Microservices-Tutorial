@@ -4,7 +4,7 @@ using Products_Core.Model;
 
 namespace Products_Core.Ports.Resources
 {
-    [DataContract, XmlRoot]
+    [DataContract(Name = "product", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
     public class ProductModel
     {
 

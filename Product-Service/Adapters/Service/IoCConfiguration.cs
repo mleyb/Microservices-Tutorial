@@ -31,19 +31,6 @@ namespace Product_API.Adapters.Service
             container.RegisterType<ProductRemovedEventHandler>();
             container.RegisterType<RemoveProductCommandHandler>();
 
-            var storage = new AtomEventsInFiles(new DirectoryInfo(Globals.StoragePath));
-            var serializer = new DataContractContentSerializer(
-                DataContractContentSerializer
-                    .CreateTypeResolver(typeof (ProductEntry).Assembly)
-                );
-
-            var events = new FifoEvents<ProductEntry>(
-                Globals.EventStreamId, 
-                storage,       
-                serializer);
-
-            container.RegisterInstance(typeof (IObserver<ProductEntry>), events, new TransientLifetimeManager());
-
             var handlerFactory = new UnityHandlerFactory(container);
 
             var subscriberRegistry = new SubscriberRegistry

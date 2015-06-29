@@ -47,6 +47,7 @@ namespace Product_API.Adapters.Controllers
                     feed.WriteTo(xmlWriter,
                                  new DataContractContentSerializer(
                                      DataContractContentSerializer.CreateTypeResolver(typeof (ProductEntry).Assembly)));
+                    xmlWriter.Flush();
                     return new HttpResponseMessage(HttpStatusCode.OK)
                     {
                         Content = new StringContent(sb.ToString())

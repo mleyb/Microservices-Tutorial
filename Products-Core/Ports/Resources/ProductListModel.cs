@@ -6,7 +6,7 @@ using Products_Core.Model;
 
 namespace Products_Core.Ports.Resources
 {
-      [DataContract, XmlRoot]
+     [DataContract(Name="products", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
     public class ProductListModel
     {
         private Link _self;

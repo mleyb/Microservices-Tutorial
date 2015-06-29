@@ -1,0 +1,11 @@
+POST http://localhost:3416/products HTTP/1.1
+User-Agent: Fiddler
+Content-Type: application/xml
+Host: localhost:3416
+Content-Length: 282
+
+<AddProductModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<productDescription>Sweet, sweet, almond Cake</productDescription>
+	<productName>Almond Cake</productName>
+	<productPrice>10.5</productPrice>
+</AddProductModel>

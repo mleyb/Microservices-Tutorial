@@ -1,4 +1,6 @@
-﻿using Products_Core.Model;
+﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using Products_Core.Model;
 
 namespace Products_Core.Ports.Resources
 {
