@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06CDD519-C168-4022-A968-2EBAE707619D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Store_Service</RootNamespace>
+    <AssemblyName>Store-Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net-oldkey.1.2.13\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="paramore.brighter.commandprocessor">
+      <HintPath>..\packages\paramore.brighter.commandprocessor.4.0.215\lib\net45\paramore.brighter.commandprocessor.dll</HintPath>
+    </Reference>
+    <Reference Include="Polly">
+      <HintPath>..\packages\Polly.2.2.1\lib\net45\Polly.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data">
+      <HintPath>..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Ado">
+      <HintPath>..\packages\Simple.Data.Ado.0.19.0.0\lib\net40\Simple.Data.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.SqlCe40">
+      <HintPath>..\packages\Simple.Data.SqlCompact40.0.19.0.0\lib\net40\Simple.Data.SqlCe40.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Topshelf">
+      <HintPath>..\packages\Topshelf.3.1.4\lib\net40-full\Topshelf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\ServiceHost\Program.cs" />
+    <Compile Include="Adapters\ServiceHost\StoreService.cs" />
+    <Compile Include="Adapters\ServiceHost\UnityHandlerFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Store-Core\Store-Core.csproj">
+      <Project>{8e6455b1-8b56-4ba0-a2a5-20370e562b26}</Project>
+      <Name>Store-Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
