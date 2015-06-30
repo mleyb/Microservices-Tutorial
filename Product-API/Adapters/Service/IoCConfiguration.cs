@@ -1,18 +1,14 @@
 ﻿using System;
-using System.IO;
-using Grean.AtomEventStore;
 using Microsoft.Practices.Unity;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
 using Polly;
-using Products_Core.Adapters.Atom;
 using Products_Core.Adapters.DataAccess;
 using Products_Core.Ports.Commands;
 using Products_Core.Ports.Events;
 using Products_Core.Ports.Handlers;
 using Product_API.Adapters.Configuration;
 using Product_API.Adapters.Controllers;
-using Product_Service;
 
 namespace Product_API.Adapters.Service
 {
