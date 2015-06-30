@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Simple.Data;
-using Store_Core.ReferenceData;
+using Store_Core.Adapters.Atom;
 
 namespace Store_Core.Adapters.DataAccess
 {
-    public class ProductsDAO : IProductsDAO
+    public class LastReadFeedItemDAO : ILastReadFeedItemDAO
     {
         private readonly dynamic _db;
 
-        public ProductsDAO()
+        public LastReadFeedItemDAO()
         {
             if (System.Web.HttpContext.Current != null)
             {
@@ -30,34 +31,34 @@ namespace Store_Core.Adapters.DataAccess
             return _db.BeginTransaction();
         }
 
-        public ProductReference Add(ProductReference newProductReference)
+        public LastReadFeedItem Add(LastReadFeedItem lastReadFeedItem)
         {
-            return _db.Products.Insert(newProductReference);
+            return _db.LastReadFeedItem.Insert(lastReadFeedItem);
         }
 
         public void Clear()
         {
-            _db.Products.DeleteAll();
+            _db.LastReadFeedItem.DeleteAll();
         }
 
-        public void Delete(int productId)
+        public void Delete(int lastFeedItemId)
         {
-            _db.Products.DeleteById(productId);
+            _db.LastReadFeedItem.DeleteById(lastFeedItemId);
         }
 
-        public IEnumerable<ProductReference> FindAll()
+        public IEnumerable<LastReadFeedItem > FindAll()
         {
-            return _db.Products.All().ToList<ProductReference>();
+            return _db.LastReadFeedItem.All().ToList<LastReadFeedItem >();
         }
 
-        public ProductReference FindById(int id)
+        public LastReadFeedItem FindByFeedId(Guid id)
         {
-            return _db.Products.FindById(id);
+            return _db.LastReadFeedItem.FindByFeedId(id);
         }
 
-        public void Update(ProductReference productReference)
+        public void Update(LastReadFeedItem productReference)
         {
-            _db.Products.UpdateById(productReference);
+            _db.LastReadFeedItem.UpdateById(productReference);
         }
 
     }

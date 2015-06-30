@@ -18,15 +18,15 @@ namespace Store_Core.Ports.Handlers
         public override ChangeProductCommand Handle(ChangeProductCommand changeProductCommand)
         {
 
-            Product product;
+            ProductReference productReference;
             using (var scope = _productsDao.BeginTransaction())
             {
-                product = _productsDao.FindById(changeProductCommand.ProductId);
-                product.ProductName = changeProductCommand.ProductName;
-                product.ProductDescription = changeProductCommand.ProductDescription;
-                product.ProductPrice = changeProductCommand.Price;
+                productReference = _productsDao.FindById(changeProductCommand.ProductId);
+                productReference.ProductName = changeProductCommand.ProductName;
+                productReference.ProductDescription = changeProductCommand.ProductDescription;
+                productReference.ProductPrice = changeProductCommand.Price;
 
-                _productsDao.Update(product);
+                _productsDao.Update(productReference);
                 scope.Commit();
             }
 

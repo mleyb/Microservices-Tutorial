@@ -23,11 +23,12 @@ namespace Store_Service.Adapters.ServiceHost
 
             var container = new UnityContainer();
             container.RegisterInstance(typeof(ILog), LogProvider.For<StoreService>(), new ContainerControlledLifetimeManager());
-            container.RegisterType<ProductsDAO>();
+            container.RegisterType<IProductsDAO, ProductsDAO>();
+            container.RegisterType<ILastReadFeedItemDAO, LastReadFeedItemDAO>();
             container.RegisterType<AddProductCommandHandler>();
             container.RegisterType<ChangeProductCommandHandler>();
             container.RegisterType<RemoveProductCommandHandler>();
-
+            
             var handlerFactory = new UnityHandlerFactory(container);
 
             var subscriberRegistry = new SubscriberRegistry
@@ -65,13 +66,13 @@ namespace Store_Service.Adapters.ServiceHost
                 .RequestContextFactory(new InMemoryRequestContextFactory())
                 .Build();
 
-            _consumer = new Consumer(commandProcessor, logger);
+            _consumer = new Consumer(new LastReadFeedItemDAO(), commandProcessor, logger);
 
         }
 
         public bool Start(HostControl hostControl)
         {
-            _consumer.Consume(new Uri("http://localhost:3416"));
+            _consumer.Consume(new Uri("http://localhost:3416/feed"));
             return true;
         }
 

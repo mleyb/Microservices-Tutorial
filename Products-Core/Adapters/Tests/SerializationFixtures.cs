@@ -7,7 +7,7 @@ using Product_Service;
 
 namespace Products_Core.Adapters.Tests
 {
-    public class SerializationTests
+    public class SerializationFixtures
     {
         private static T SerializeToXml<T>(T value)
         {

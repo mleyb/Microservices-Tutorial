@@ -19,10 +19,10 @@ namespace Store_Core.Ports.Handlers
 
         public override RemoveProductCommand Handle(RemoveProductCommand removeProductCommand)
         {
-            Product product;
+            ProductReference productReference;
             using (var scope = _productsDao.BeginTransaction())
             {
-                product = _productsDao.FindById(removeProductCommand.ProductId);
+                productReference = _productsDao.FindById(removeProductCommand.ProductId);
                 _productsDao.Delete(removeProductCommand.ProductId);
 
                 scope.Commit();

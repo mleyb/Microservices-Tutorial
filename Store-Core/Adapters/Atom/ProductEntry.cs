@@ -36,7 +36,7 @@ namespace Store_Core.Adapters.Atom
         public int ProductId { get; set; }
         [DataMember (Name = "name")]
         public string ProductName { get; set; }
-        [DataMember(Name ="name")]
+        [DataMember(Name ="price")]
         public double Price { get; set; }
 
     }

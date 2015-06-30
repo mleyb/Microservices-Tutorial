@@ -34,6 +34,7 @@ using System.Threading.Tasks;
 using Grean.AtomEventStore;
 using Machine.Specifications;
 using Store_Core.Adapters.Atom;
+using Store_Core.Adapters.DataAccess;
 
 namespace Store_Core.Adapters.Tests
 {
@@ -45,7 +46,9 @@ namespace Store_Core.Adapters.Tests
 
         private Establish context = () =>
         {
-            s_feedReader = new ReferenceDataFeedReader<ProductEntry>(s_atomFeed);
+            var serializer = new DataContractContentSerializer(DataContractContentSerializer.CreateTypeResolver(typeof(ProductEntry).Assembly));
+            var feed = AtomFeed.Parse(s_atomFeed, serializer);
+            s_feedReader = new ReferenceDataFeedReader<ProductEntry>(new LastReadFeedItemDAO(), feed);
         };
 
         private Because of = () => s_entry = s_feedReader.FirstOrDefault();

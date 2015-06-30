@@ -78,12 +78,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\Atom\AtomFeedGateway.cs" />
+    <Compile Include="Adapters\Atom\LastReadFeedItem.cs" />
     <Compile Include="Adapters\Atom\ProductEntry.cs" />
     <Compile Include="Adapters\Atom\ReferenceDataFeedReader.cs" />
+    <Compile Include="Adapters\DataAccess\ILastReadFeedItemDAO.cs" />
     <Compile Include="Adapters\DataAccess\IProductsDAO.cs" />
+    <Compile Include="Adapters\DataAccess\LastReadFeedItemDAO.cs" />
     <Compile Include="Adapters\DataAccess\ProductsDAO.cs" />
     <Compile Include="Adapters\Service\Consumer.cs" />
-    <Compile Include="Adapters\Tests\ReferenceDataReadTests.cs" />
+    <Compile Include="Adapters\Tests\LastReadFeedItemDAOFixture.cs" />
+    <Compile Include="Adapters\Tests\ReferenceDataReadFixture.cs" />
     <Compile Include="Ports\Commands\AddProductCommand.cs" />
     <Compile Include="Ports\Commands\ChangeProductCommand.cs" />
     <Compile Include="Ports\Commands\RemoveProductCommand.cs" />
@@ -91,7 +95,7 @@
     <Compile Include="Ports\Handlers\ChangeProductCommandHandler.cs" />
     <Compile Include="Ports\Handlers\RemoveProductCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceData\Product.cs" />
+    <Compile Include="ReferenceData\ProductReference.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

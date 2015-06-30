@@ -20,11 +20,11 @@ namespace Store_Core.Ports.Handlers
         [UsePolicy(CommandProcessor.RETRYPOLICY, step: 3)]
         public override AddProductCommand Handle(AddProductCommand addProductCommand)
         {
-            Product insertedProduct;
             using (var scope = _productsDao.BeginTransaction())
             {
-                insertedProduct = _productsDao.Add(
-                    new Product(
+                ProductReference insertedProductReference = _productsDao.Add(
+                    new ProductReference(
+                        productId: addProductCommand.ProductId,
                         productName: addProductCommand.ProductName,
                         productDescription: addProductCommand.ProductDescription,
                         productPrice: addProductCommand.ProductPrice)
@@ -32,7 +32,7 @@ namespace Store_Core.Ports.Handlers
 
                 scope.Commit();
 
-                addProductCommand.ProductId = insertedProduct.Id;
+                addProductCommand.ProductId = insertedProductReference.Id;
 
             }
 

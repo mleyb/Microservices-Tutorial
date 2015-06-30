@@ -85,9 +85,9 @@
     <Compile Include="Adapters\Atom\ProductEntry.cs" />
     <Compile Include="Adapters\DataAccess\IProductsDAO.cs" />
     <Compile Include="Adapters\DataAccess\ProductsDAO.cs" />
-    <Compile Include="Adapters\Tests\ProductCommandHandlersTests.cs" />
-    <Compile Include="Adapters\Tests\ProductEventHandlerTests.cs" />
-    <Compile Include="Adapters\Tests\SerializationTests.cs" />
+    <Compile Include="Adapters\Tests\ProductCommandHandlersFixture.cs" />
+    <Compile Include="Adapters\Tests\ProductEventHandlerFixture.cs" />
+    <Compile Include="Adapters\Tests\SerializationFixtures.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Ports\Commands\AddProductCommand.cs" />

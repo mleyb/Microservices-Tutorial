@@ -4,7 +4,9 @@ using System.Net.Cache;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using Grean.AtomEventStore;
 using paramore.brighter.commandprocessor.Logging;
+using Store_Core.Adapters.DataAccess;
 
 namespace Store_Core.Adapters.Atom
 {
@@ -13,11 +15,13 @@ namespace Store_Core.Adapters.Atom
         private ThreadLocal<HttpClient> _client;
         private readonly double _timeout;
 
-        public readonly ILog Logger;
+            private readonly ILastReadFeedItemDAO _lastReadFeedItemDao;
+            public readonly ILog _logger;
 
-        public AtomFeedGateway(ILog logger)
+        public AtomFeedGateway(ILastReadFeedItemDAO lastReadFeedItemDao, ILog logger)
         {
-            Logger = logger;
+            _lastReadFeedItemDao = lastReadFeedItemDao;
+            _logger = logger;
             _timeout = 5000;
         }
 
@@ -26,16 +30,20 @@ namespace Store_Core.Adapters.Atom
        {
             try
             {
+                _logger.DebugFormat("Reading reference data from {0}", uri);
                 var response = Client().GetAsync(uri).Result;
                 response.EnsureSuccessStatusCode();
-                var reader = new ReferenceDataFeedReader<ProductEntry>(response.Content.ReadAsStringAsync().Result);
+
+                var serializer = new DataContractContentSerializer(DataContractContentSerializer.CreateTypeResolver(typeof(ProductEntry).Assembly));
+                var feed = AtomFeed.Parse(response.Content.ReadAsStringAsync().Result, serializer);
+                var reader = new ReferenceDataFeedReader<ProductEntry>(_lastReadFeedItemDao, feed);
                 return reader;
             }
             catch (AggregateException ae)
             {
                 foreach (var exception in ae.Flatten().InnerExceptions)
                 {
-                    Logger.ErrorFormat("Threw exception getting feed from the Server {0}", uri, exception.Message);
+                    _logger.InfoFormat("Threw exception getting feed from the Server {0}", uri, exception.Message);
                 }
 
                 throw new ApplicationException(string.Format("Error retrieving the feed from the server, see log for details"));

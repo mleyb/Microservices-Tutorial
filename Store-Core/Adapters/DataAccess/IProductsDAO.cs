@@ -6,11 +6,11 @@ namespace Store_Core.Adapters.DataAccess
     public interface IProductsDAO
     {
         dynamic BeginTransaction();
-        Product Add(Product newProduct);
+        ProductReference Add(ProductReference newProductReference);
         void Clear();
         void Delete(int productId);
-        IEnumerable<Product> FindAll();
-        Product FindById(int id);
-        void Update(Product product);
+        IEnumerable<ProductReference> FindAll();
+        ProductReference FindById(int id);
+        void Update(ProductReference productReference);
     }
 }
