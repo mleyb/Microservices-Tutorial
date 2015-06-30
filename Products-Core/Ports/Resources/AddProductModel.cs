@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace Products_Core.Ports.Resources
 {
+    [DataContract, XmlRoot]
     public class AddProductModel
     {
         [DataMember(Name = "productDescription"), XmlElement(ElementName = "productDescription")]

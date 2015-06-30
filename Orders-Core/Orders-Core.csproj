@@ -93,6 +93,7 @@
     <Compile Include="Adapters\Tests\OrderCommandHandlersFixture.cs" />
     <Compile Include="Adapters\Tests\OrderDAOFixture.cs" />
     <Compile Include="Adapters\Tests\OrderMailerServiceFixture.cs" />
+    <Compile Include="Adapters\Tests\SerializationFixtures.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Model\EmailAddress.cs" />
     <Compile Include="Model\Order.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Ports\IAmAMailTranslator.cs" />
     <Compile Include="Ports\MailTranslator.cs" />
     <Compile Include="Ports\OrderUpdateCommandMessageMapper.cs" />
+    <Compile Include="Ports\Resources\AddOrderModel.cs" />
     <Compile Include="Ports\Resources\Link.cs" />
     <Compile Include="Ports\Resources\OrderListItemModel.cs" />
     <Compile Include="Ports\Resources\OrderListModel.cs" />

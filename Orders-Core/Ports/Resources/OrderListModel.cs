@@ -7,7 +7,7 @@ using Orders_Core.Model;
 
 namespace Orders_Core.Ports.Resources
 {
-     [DataContract, XmlRoot]
+    [DataContract, XmlRoot]
     public class OrderListModel
     {
         private Link _self;
