@@ -1,11 +1,10 @@
 ﻿using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
-using Products_Core.Adapters.DataAccess;
-using Products_Core.Model;
-using Products_Core.Ports.Commands;
-using Products_Core.Ports.Events;
+using Store_Core.Adapters.DataAccess;
+using Store_Core.Ports.Commands;
+using Store_Core.ReferenceData;
 
-namespace Products_Core.Ports.Handlers
+namespace Store_Core.Ports.Handlers
 {
     public class RemoveProductCommandHandler : RequestHandler<RemoveProductCommand>
     {
@@ -28,9 +27,6 @@ namespace Products_Core.Ports.Handlers
 
                 scope.Commit();
             }
-
-            if (product != null)
-                _commandProcessor.Publish(new ProductRemovedEvent(product.Id, product.ProductName, product.ProductDescription, product.ProductPrice));
 
             return base.Handle(removeProductCommand);
         }

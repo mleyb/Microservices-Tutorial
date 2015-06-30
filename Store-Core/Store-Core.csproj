@@ -82,8 +82,14 @@
     <Compile Include="Adapters\Atom\ReferenceDataFeedReader.cs" />
     <Compile Include="Adapters\DataAccess\IProductsDAO.cs" />
     <Compile Include="Adapters\DataAccess\ProductsDAO.cs" />
-    <Compile Include="Adapters\Service\FeedConsumer.cs" />
+    <Compile Include="Adapters\Service\Consumer.cs" />
     <Compile Include="Adapters\Tests\ReferenceDataReadTests.cs" />
+    <Compile Include="Ports\Commands\AddProductCommand.cs" />
+    <Compile Include="Ports\Commands\ChangeProductCommand.cs" />
+    <Compile Include="Ports\Commands\RemoveProductCommand.cs" />
+    <Compile Include="Ports\Handlers\AddProductCommandHandler.cs" />
+    <Compile Include="Ports\Handlers\ChangeProductCommandHandler.cs" />
+    <Compile Include="Ports\Handlers\RemoveProductCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceData\Product.cs" />
   </ItemGroup>
