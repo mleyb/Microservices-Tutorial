@@ -4,7 +4,7 @@ using Orders_Core.Model;
 
 namespace Orders_Core.Ports.Resources
 {
-    [DataContract, XmlRoot]
+    [DataContract(Name = "order-list-item-model", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
     public class OrderListItemModel
     {
         [DataMember(Name = "self"), XmlElement(ElementName = "self")]

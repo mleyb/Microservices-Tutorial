@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Products_Core.Ports.Resources
 {
-    [DataContract(Name="addProductModel", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
+    [DataContract(Name="add-product-model", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
     public class AddProductModel
     {
         [DataMember(Name = "productDescription"), XmlElement(ElementName = "productDescription")]

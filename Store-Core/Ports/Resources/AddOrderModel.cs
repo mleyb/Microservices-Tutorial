@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Store_Core.Ports.Resources
 {
-    [DataContract, XmlRoot]
+    [DataContract(Name="add-order-model", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
     public class AddOrderModel
     {
         [DataMember(Name = "customerName"), XmlElement(ElementName = "customerName")]

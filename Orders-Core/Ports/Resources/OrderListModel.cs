@@ -7,7 +7,7 @@ using Orders_Core.Model;
 
 namespace Orders_Core.Ports.Resources
 {
-    [DataContract, XmlRoot]
+    [DataContract(Name = "order-list-model", Namespace = "urn:paramore:samples:cakeshop"), XmlRoot]
     public class OrderListModel
     {
         private Link _self;
