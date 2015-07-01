@@ -137,6 +137,7 @@
     <Compile Include="Adapters\Configuration\StoreServerConfiguration.cs" />
     <Compile Include="Adapters\Configuration\UnityHandlerFactory.cs" />
     <Compile Include="Adapters\Configuration\UnityMessageMapperFactory.cs" />
+    <Compile Include="Adapters\Controllers\StoreFrontController.cs" />
     <Compile Include="Adapters\Service\IoCConfiguration.cs" />
     <Compile Include="Adapters\Service\Startup.cs" />
     <Compile Include="Adapters\Service\StoreService.cs" />
@@ -148,7 +149,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Adapters\Controllers\" />
     <Folder Include="Adapters\Filters\" />
     <Folder Include="Adapters\Formatters\" />
   </ItemGroup>
@@ -159,9 +159,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\MessageStore.sdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="RESTManualTests.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

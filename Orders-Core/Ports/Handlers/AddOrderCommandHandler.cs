@@ -47,9 +47,10 @@ namespace Orders_Core.Ports.Handlers
         {
             using (var scope = _ordersDao.BeginTransaction())
             {
+                base.logger.DebugFormat(string.Format("Writing new order for customer: {0}", addOrderCommand.CustomerName));
                 var inserted = _ordersDao.Add(
                     new Order(
-                        customerName: addOrderCommand.OrderName,
+                        customerName: addOrderCommand.CustomerName,
                         orderDescription: addOrderCommand.OrderDescription,
                         dueDate: addOrderCommand.OrderDueDate
                         )

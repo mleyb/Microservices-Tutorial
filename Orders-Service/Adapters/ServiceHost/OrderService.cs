@@ -26,14 +26,12 @@ namespace Orders_Service.Adapters.ServiceHost
             var container = new UnityContainer();
             container.RegisterInstance(typeof(ILog), LogProvider.For<OrderService>(), new ContainerControlledLifetimeManager());
             container.RegisterType<AddOrderCommandMessageMapper>();
-            container.RegisterType<CompleteOrderCommandMessageMapper>();
-            container.RegisterType<EditOrderCommandMessageMapper>();
             container.RegisterType<OrderUpdateCommandMessageMapper>();
             container.RegisterType<AddOrderCommandHandler>();
             container.RegisterType<CompleteOrderCommandHandler>();
             container.RegisterType<EditOrderCommandHandler>();
             container.RegisterType<OrderUpdateCommandHandler>();
-            container.RegisterType<OrdersDAO>();
+            container.RegisterType<IOrdersDAO, OrdersDAO>();
 
             var handlerFactory = new UnityHandlerFactory(container);
             var messageMapperFactory = new UnityMessageMapperFactory(container);
@@ -73,9 +71,8 @@ namespace Orders_Service.Adapters.ServiceHost
                 .Build();
 
             //create message mappers
-            var messageMapperRegistry = new MessageMapperRegistry(messageMapperFactory)
-            {
-            };
+            var messageMapperRegistry = new MessageMapperRegistry(messageMapperFactory);
+            messageMapperRegistry.Register<AddOrderCommand, AddOrderCommandMessageMapper>();
 
             var rmqMessageConsumerFactory = new RmqMessageConsumerFactory(logger);
 

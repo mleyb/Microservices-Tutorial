@@ -88,33 +88,29 @@
     <Compile Include="Adapters\Service\Consumer.cs" />
     <Compile Include="Adapters\Tests\LastReadFeedItemDAOFixture.cs" />
     <Compile Include="Adapters\Tests\ReferenceDataReadFixture.cs" />
+    <Compile Include="Adapters\Tests\SerializationFixtures.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Ports\Commands\AddOrderCommand.cs" />
     <Compile Include="Ports\Commands\AddProductCommand.cs" />
     <Compile Include="Ports\Commands\ChangeProductCommand.cs" />
-    <Compile Include="Ports\Commands\CompleteOrderCommand.cs" />
-    <Compile Include="Ports\Commands\EditOrderCommand.cs" />
     <Compile Include="Ports\Commands\ICanBeValidated.cs" />
-    <Compile Include="Ports\Commands\OrderUpdateCommand.cs" />
     <Compile Include="Ports\Commands\RemoveProductCommand.cs" />
     <Compile Include="Ports\Handlers\AddOrderCommandHandler.cs" />
     <Compile Include="Ports\Handlers\AddProductCommandHandler.cs" />
     <Compile Include="Ports\Handlers\ChangeProductCommandHandler.cs" />
-    <Compile Include="Ports\Handlers\CompleteOrderCommandHandler.cs" />
-    <Compile Include="Ports\Handlers\EditOrderCommandHandler.cs" />
-    <Compile Include="Ports\Handlers\OrderUpdateCommandHandler.cs" />
     <Compile Include="Ports\Handlers\RemoveProductCommandHandler.cs" />
     <Compile Include="Ports\Handlers\ValidationAttribute.cs" />
     <Compile Include="Ports\Handlers\ValidationHandler.cs" />
     <Compile Include="Ports\Mappers\AddOrderCommandMessageMapper.cs" />
-    <Compile Include="Ports\Mappers\CompleteOrderCommandMessageMapper.cs" />
-    <Compile Include="Ports\Mappers\EditOrderCommandMessageMapper.cs" />
-    <Compile Include="Ports\Mappers\OrderUpdateCommandMessageMapper.cs" />
+    <Compile Include="Ports\Resources\AddOrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceData\ProductReference.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="App_Data\MessageStore.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\Store.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

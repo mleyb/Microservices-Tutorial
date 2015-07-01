@@ -95,8 +95,6 @@
     <Compile Include="Adapters\ServiceHost\OrderService.cs" />
     <Compile Include="Adapters\ServiceHost\Program.cs" />
     <Compile Include="Ports\Mappers\AddOrderCommandMessageMapper.cs" />
-    <Compile Include="Ports\Mappers\CompleteOrderCommandMessageMapper.cs" />
-    <Compile Include="Ports\Mappers\EditOrderCommandMessageMapper.cs" />
     <Compile Include="Ports\Mappers\OrderUpdateCommandMessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

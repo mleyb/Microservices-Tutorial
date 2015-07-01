@@ -4,7 +4,7 @@ using Store_Core.Ports.Commands;
 
 namespace Store_Core.Ports.Mappers
 {
-    class AddOrderCommandMessageMapper : IAmAMessageMapper<AddOrderCommand>
+    public class AddOrderCommandMessageMapper : IAmAMessageMapper<AddOrderCommand>
     {
         public Message MapToMessage(AddOrderCommand request)
         {

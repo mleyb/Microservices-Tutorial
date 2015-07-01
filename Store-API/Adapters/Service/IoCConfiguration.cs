@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.Practices.Unity;
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
@@ -6,6 +8,11 @@ using paramore.brighter.commandprocessor.messagestore.mssql;
 using paramore.brighter.commandprocessor.messaginggateway.rmq;
 using Polly;
 using Store_API.Adapters.Configuration;
+using Store_API.Adapters.Controllers;
+using Store_Core.Adapters.DataAccess;
+using Store_Core.Ports.Commands;
+using Store_Core.Ports.Handlers;
+using Store_Core.Ports.Mappers;
 
 namespace Store_API.Adapters.Service
 {
@@ -13,16 +20,24 @@ namespace Store_API.Adapters.Service
     {
         public static void Run(UnityContainer container)
         {
-            //container.RegisterType<OrdersController>();
+            container.RegisterType<StoreFrontController>();
             container.RegisterInstance(typeof(ILog), LogProvider.For<StoreService>(), new ContainerControlledLifetimeManager());
-            //container.RegisterType<OrdersDAO>();
+            container.RegisterType<AddOrderCommandHandler>();
+            container.RegisterType<AddProductCommandHandler>();
+            container.RegisterType<ChangeProductCommandHandler>();
+            container.RegisterType<RemoveProductCommandHandler>();
+            container.RegisterType<IProductsDAO, ProductsDAO>();
 
             var logger = container.Resolve<ILog>();
             var handlerFactory = new UnityHandlerFactory(container);
 
             var subscriberRegistry = new SubscriberRegistry();
-            //create policies
+            subscriberRegistry.Register<AddOrderCommand, AddOrderCommandHandler>();
+            subscriberRegistry.Register<AddProductCommand, AddProductCommandHandler>();
+            subscriberRegistry.Register<ChangeProductCommand, ChangeProductCommandHandler>();
+            subscriberRegistry.Register<RemoveProductCommand, RemoveProductCommandHandler>();
 
+            //create policies
             var retryPolicy = Policy
                 .Handle<Exception>()
                 .WaitAndRetry(new[]
@@ -44,10 +59,12 @@ namespace Store_API.Adapters.Service
 
             var messageMapperFactory = new UnityMessageMapperFactory(container);
             var messageMapperRegistry = new MessageMapperRegistry(messageMapperFactory);
+            messageMapperRegistry.Register<AddOrderCommand, AddOrderCommandMessageMapper>();
 
             var gateway = new RmqMessageProducer(container.Resolve<ILog>());
-            const string MessageDbPath = "~\\App_Data\\MessageStore.sdf";
-            IAmAMessageStore<Message> sqlMessageStore = new MsSqlMessageStore(new MsSqlMessageStoreConfiguration("DataSource=\"" + MessageDbPath + "\"", "Messages", MsSqlMessageStoreConfiguration.DatabaseType.SqlCe), logger);
+            var dbPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase.Substring(8)), "App_Data\\MessageStore.sdf");
+
+            IAmAMessageStore<Message> sqlMessageStore = new MsSqlMessageStore(new MsSqlMessageStoreConfiguration("DataSource=\"" + dbPath + "\"", "Messages", MsSqlMessageStoreConfiguration.DatabaseType.SqlCe), logger);
 
             var commandProcessor = CommandProcessorBuilder.With()
                     .Handlers(new HandlerConfiguration(subscriberRegistry, handlerFactory))

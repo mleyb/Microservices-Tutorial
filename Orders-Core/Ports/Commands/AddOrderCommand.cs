@@ -32,19 +32,19 @@ namespace Orders_Core.Ports.Commands
         public string OrderDescription { get; private set; }
         public DateTime? OrderDueDate { get; private set; }
         public int OrderId { get; set; }
-        public string OrderName { get; private set; }
+        public string CustomerName { get; private set; }
 
-        public AddOrderCommand(string orderName, string orderDescription, DateTime? dueDate = null)
+        public AddOrderCommand(string customerName, string orderDescription, DateTime? dueDate = null)
             : base(Guid.NewGuid())
         {
-            OrderName = orderName;
+            CustomerName = customerName;
             OrderDescription = orderDescription;
             OrderDueDate = dueDate;
         }
 
         public bool IsValid()
         {
-            if ((OrderDescription == null) || (OrderName == null))
+            if ((OrderDescription == null) || (CustomerName == null))
             {
                 return false;
             }

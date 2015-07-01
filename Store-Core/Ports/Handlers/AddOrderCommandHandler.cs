@@ -24,7 +24,6 @@ THE SOFTWARE. */
 
 using paramore.brighter.commandprocessor;
 using paramore.brighter.commandprocessor.Logging;
-using paramore.brighter.commandprocessor.policy.Attributes;
 using Store_Core.Ports.Commands;
 
 namespace Store_Core.Ports.Handlers
