@@ -1,0 +1,11 @@
+POST http://localhost:3300/storefront HTTP/1.1
+User-Agent: Fiddler
+Host: localhost:3300
+Content-Type: text/xml
+Content-Length: 268
+
+<AddOrderModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<customerName>Pooh Bear</customerName>
+	<description>Honey Cake</description>
+	<dueDate>2015-06-30T23:25:48.0204060+01:00</dueDate>
+</AddOrderModel>
